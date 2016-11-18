@@ -1,0 +1,26 @@
+{
+  "name": "to_do_app",
+  "version": "1.0.0",
+  "description": "To-Do Weekend 4 Assignment",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emilykeenan/to-do.git"
+  },
+  "author": "Emily Keenan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emilykeenan/to-do/issues"
+  },
+  "homepage": "https://github.com/emilykeenan/to-do#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jquery": "^3.1.1",
+    "pg": "^6.1.0"
+  }
+}
