@@ -1,6 +1,20 @@
 $(document).ready(function() {
   console.log('jquery loaded!');
+
+  // getting tasks from the database on load
   getTasks();
+
+  // event functions
+  $('#taskContainer').on('click', '.completeButton', function(){
+    var id = $(this).parent().data('id');
+    console.log('task '+ id + ' completed.');
+  });
+
+  $('#taskContainer').on('click', '.deleteButton', function(){
+    var id = $(this).parent().data('id');
+    console.log('task '+ id + ' completed.');
+  });
+
 }); // end doc ready
 
 function getTasks() {
@@ -17,13 +31,14 @@ function getTasks() {
 }
 
 function appendTasks(tasks) {
-  $("#books-list").empty();
+  $("#taskContainer").empty();
 
   for (var i = 0; i < tasks.length; i++) {
-    $("#taskContainer").append('<div class="task"></div>');
+    var task = tasks[i];
+    $("#taskContainer").append('<div class="task" data-id="' + task.id + '"></div>');
     $el = $('#taskContainer').children().last();
-    $el.append('<h2> ' + tasks[i].description + '</h2>');
-    $el.append('<button class="deleteButton">Complete</button>');
+    $el.append('<h2> ' + task.description + '</h2>');
+    $el.append('<button class="completeButton">Complete</button>');
     $el.append('<button class="deleteButton">Delete</button>');
   }
 }
