@@ -2,8 +2,12 @@ var express =  require('express');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
+var tasks = require('./routes/tasks');
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// routes
+app.use('/tasks', tasks);
 
 // Catchall route
 app.get('/', function (req, res) {
