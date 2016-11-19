@@ -42,6 +42,7 @@ function appendTasks(tasks) {
     var task = tasks[i];
     $("#taskContainer").append('<div class="task ' + task.status +  '" data-id="' + task.id + '"></div>');
     $el = $('#taskContainer').children().last();
+    $el.append('<div class="arrow"></div>')
     $el.append('<h2> ' + task.description + '</h2>');
     $el.append('<button class="completeButton">Complete</button>');
     $el.append('<button class="deleteButton">Delete</button>');

@@ -1,7 +1,104 @@
-.complete {
-  background: grey;
+body {
+  background: url('../assets/images/background.png') top left;
+  background-size: 15%;
+  font-family: 'Walter Turncoat', cursive;
 }
 
 .incomplete {
-  background: magenta;
+  height: 100px;
+  width: 600px;
+  padding: 20px;
+  margin: 40px auto 20px auto;
+  border-radius: 20px;
+  text-align: right;
+  background: hsla(286, 95%, 75%, 0.12);
+  border: 3px dotted hsla(286, 95%, 75%, 1);
+}
+
+.incomplete button {
+  height: 35px;
+  width: 80px;
+  margin: -4px 3px 3px 3px;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 30px;
+}
+
+.incomplete .completeButton {
+  background: hsla(312, 95%, 55%, 1);
+  color: white;
+}
+
+.incomplete .completeButton:hover {
+  background: hsla(312, 95%, 55%, 0.05);
+  border: 2px solid hsla(312, 95%, 55%, 0.9);
+  color: black;
+
+}
+
+.incomplete .deleteButton {
+  background: hsla(307, 55%, 85%, 0.8);
+  border: hsla(307, 55%, 85%, 0.9);
+  color: black;
+}
+
+.incomplete .deleteButton:hover {
+  background: hsla(312, 95%, 55%, 0.6);
+  border: 1px solid hsla(312, 95%, 55%, 0.7);
+  color: white;
+}
+
+.complete {
+  height: 100px;
+  width: 600px;
+  padding: 20px;
+  margin: 40px auto 20px auto;
+  border-radius: 20px;
+  text-align: right;
+  background: hsla(188, 35%, 65%, 0.17);
+  border: 3px solid hsla(188, 35%, 65%, 0.5);
+}
+
+.incomplete .arrow {
+  height: 80px;
+  width: 80px;
+  float: left;
+  margin: -40px 0 0 -40px;
+  background: url('../assets/images/arrow.png') no-repeat left top;
+  background-size: 80px;
+}
+
+.complete .arrow {
+  height: 60px;
+  width: 60px;
+  float: left;
+  margin: 75px 0 0 -40px;
+  background: url('../assets/images/check.svg') no-repeat left bottom;
+  background-size: 60px;
+}
+
+.complete h2 {
+    opacity: 0.5;
+}
+
+.complete button {
+  height: 35px;
+  width: 80px;
+  margin: -4px 3px 3px 3px;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 30px;
+  background: hsla(188, 35%, 65%, 0.5);
+  border: 1px solid hsla(188, 35%, 65%, 1);
+}
+
+.complete button:hover {
+background: hsla(188, 35%, 65%, 1);
+color: white;
+}
+
+.complete .completeButton {
+  display: none;
 }
