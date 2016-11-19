@@ -27,6 +27,34 @@ router.get('/', function(req, res) {
     });
 
   });
-});
+}); // get request ends
+
+router.post('/', function(req, res) {
+  var newTask = req.body;
+  console.log(newTask);
+  pg.connect(connectionString, function(err, client, done) {
+    if(err) {
+      console.log('connection error: ', err);
+      res.sendStatus(500);
+    }
+
+    client.query(
+      'INSERT INTO tasks (description, status) ' +
+      'VALUES ($1, $2)',
+      [newTask.description, newTask.status],
+      function(err, result) {
+        done();
+
+        if(err) {
+          console.log('insert query error: ', err);
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(201);
+        }
+      });
+
+  });
+
+}); // post request ends
 
 module.exports = router;

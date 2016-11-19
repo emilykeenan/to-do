@@ -1,0 +1,7 @@
+.complete {
+  background: grey;
+}
+
+.incomplete {
+  background: magenta;
+}

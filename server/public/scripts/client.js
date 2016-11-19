@@ -8,12 +8,20 @@ $(document).ready(function() {
   $('#taskContainer').on('click', '.completeButton', function(){
     var id = $(this).parent().data('id');
     console.log('task '+ id + ' completed.');
+    $(this).parent().removeClass('incomplete').addClass('complete');
   });
 
   $('#taskContainer').on('click', '.deleteButton', function(){
     var id = $(this).parent().data('id');
     console.log('task '+ id + ' completed.');
   });
+
+  $('#submitTask').on('click', function() {
+    postTask();
+    $('#taskForm').find('input').val('');
+  });
+
+
 
 }); // end doc ready
 
@@ -35,10 +43,37 @@ function appendTasks(tasks) {
 
   for (var i = 0; i < tasks.length; i++) {
     var task = tasks[i];
-    $("#taskContainer").append('<div class="task" data-id="' + task.id + '"></div>');
+    $("#taskContainer").append('<div class="task ' + task.status +  '" data-id="' + task.id + '"></div>');
     $el = $('#taskContainer').children().last();
     $el.append('<h2> ' + task.description + '</h2>');
     $el.append('<button class="completeButton">Complete</button>');
     $el.append('<button class="deleteButton">Delete</button>');
   }
+}
+
+function postTask() {
+  event.preventDefault();
+
+  var task = {};
+
+  $.each($('#taskForm').serializeArray(), function (i, field) {
+        task[field.name] = field.value;
+      });
+
+      task.status = 'incomplete';
+
+  console.log('task: ', task);
+
+  $.ajax({
+    type: 'POST',
+    url: '/tasks',
+    data: task,
+    success: function(response) {
+      getTasks();
+    },
+    error: function() {
+      console.log('could not post a new task');
+    }
+  })
+
 }
