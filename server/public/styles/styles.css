@@ -2,6 +2,51 @@ body {
   background: url('../assets/images/background.png') top left;
   background-size: 15%;
   font-family: 'Walter Turncoat', cursive;
+  margin: 0px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 70px;
+  padding: 40px;
+  margin-top: 0px;
+  background: hsla(188, 35%, 65%, 0.08);
+  border-bottom: 5px dotted hsla(188, 35%, 65%, 0.17);
+  letter-spacing: 8px;
+}
+
+#formContainer {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#formContainer input {
+  border-radius: 20px;
+  width: 800px;
+  height: 40px;
+  border: 1px solid hsla(0, 5%, 75%, 1);
+  text-align: center;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
+}
+
+#submitTask {
+  width: 180px;
+  margin: 20px auto 80px auto;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: 0.5px solid hsla(188, 35%, 65%, 0.78);
+  background: hsla(188, 35%, 65%, 0.9);
+  color: white;
+  font-size: 15px;
+  padding: 15px;
+  text-transform: uppercase;
+  border-radius: 30px;
+  display: block;
+}
+
+#submitTask:hover {
+  background: hsla(188, 35%, 65%, 0.3);
+  color: hsla(188, 35%, 65%, 1);
 }
 
 .incomplete {
@@ -13,6 +58,15 @@ body {
   text-align: right;
   background: hsla(286, 95%, 75%, 0.12);
   border: 3px dotted hsla(286, 95%, 75%, 1);
+}
+
+.incomplete .arrow {
+  height: 80px;
+  width: 80px;
+  float: left;
+  margin: -40px 0 0 -40px;
+  background: url('../assets/images/arrow.png') no-repeat left top;
+  background-size: 80px;
 }
 
 .incomplete button {
@@ -58,15 +112,6 @@ body {
   text-align: right;
   background: hsla(188, 35%, 65%, 0.17);
   border: 3px solid hsla(188, 35%, 65%, 0.5);
-}
-
-.incomplete .arrow {
-  height: 80px;
-  width: 80px;
-  float: left;
-  margin: -40px 0 0 -40px;
-  background: url('../assets/images/arrow.png') no-repeat left top;
-  background-size: 80px;
 }
 
 .complete .arrow {
