@@ -57,6 +57,11 @@ function postTask() {
 
   console.log('task: ', task);
 
+  if(task.description == '') {
+    alert('Please enter a task before submitting!');
+    return false;
+  }
+
   $.ajax({
     type: 'POST',
     url: '/tasks',
