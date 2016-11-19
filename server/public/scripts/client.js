@@ -8,7 +8,29 @@ $(document).ready(function() {
   $('#taskContainer').on('click', '.completeButton', function(){
     console.log($(this).parent().data('id'));
     $(this).parent().removeClass('incomplete').addClass('complete ');
-    completeTask();
+
+    var id = $(this).parent().data('id');
+    console.log(id);
+
+    // make task object
+    var task = {};
+    task.id=id;
+    task.status='complete';
+    console.log(task);
+
+    $.ajax({
+      type: 'PUT',
+      url: '/tasks/' + id,
+      data: task,
+      success: function(result) {
+        console.log('completed task');
+        getTasks();
+      },
+      error: function(result) {
+        console.log('could not complete task.');
+      }
+    });
+
   });
 
   $('#taskContainer').on('click', '.deleteButton', function(){
@@ -80,26 +102,6 @@ function postTask() {
 
 function completeTask() {
 
-  var id = $(this).parent().data('id');
-  console.log($(this).children());
 
-  // make task object
-  var task = {};
-  task.id=id;
-  task.status='complete';
-  console.log(task);
-
-  $.ajax({
-    type: 'PUT',
-    url: '/tasks/' + id,
-    data: task,
-    success: function(result) {
-      console.log('completed task');
-      getTasks();
-    },
-    error: function(result) {
-      console.log('could not complete task.');
-    }
-  });
 
 }
