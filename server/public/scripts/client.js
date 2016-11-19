@@ -75,6 +75,12 @@ function deleteTask() {
   var id = $(this).parent().data('id');
   console.log(id);
 
+  var confirmation = confirm("Are you sure you want to delete this task?");
+  if (confirmation === false) {
+    event.preventDefault();
+    return false;
+  }
+
   $.ajax({
     type: 'DELETE',
     url: '/tasks/' + id,
