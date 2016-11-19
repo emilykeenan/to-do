@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  console.log('jquery loaded!');
 
   // getting tasks from the database on page load
   getTasks();
@@ -61,8 +60,6 @@ function postTask() {
 
   task.status = 'incomplete';
 
-  console.log('task: ', task);
-
 // verification to ensure no posted tasks are blank
   if(task.description == '') {
     alert('Please enter a task before submitting!');
@@ -86,7 +83,6 @@ function postTask() {
 // function to delete a task from the database and reappend tasks to the DOM
 function deleteTask() {
   var id = $(this).parent().data('id');
-  console.log(id);
 
 // delete confirmation --- if the user does not click "ok" the function ends and never
 // reaches the ajax call
@@ -110,23 +106,19 @@ function deleteTask() {
 
 // function to mark a task as complete and update its CSS class accordingly
 function completeTask() {
-  console.log($(this).parent().data('id'));
   $(this).parent().removeClass('incomplete').addClass('complete ');
 
   var id = $(this).parent().data('id');
-  console.log(id);
 
   var task = {};
   task.id=id;
   task.status='complete';
-  console.log(task);
 
   $.ajax({
     type: 'PUT',
     url: '/tasks/' + id,
     data: task,
     success: function(result) {
-      console.log('completed task');
       getTasks();
     },
     error: function(result) {

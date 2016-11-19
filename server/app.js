@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // routes
 app.use('/tasks', tasks);
 
-// Catchall route
+// static files
 app.get('/', function (req, res) {
   res.sendFile(path.resolve('./server/public/views/index.html'));
 });

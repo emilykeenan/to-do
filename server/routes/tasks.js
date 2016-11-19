@@ -3,10 +3,9 @@ var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/sigma';
 
+// request to get the tasks from the database
 router.get('/', function(req, res) {
-  console.log('get request');
 
-  // get tasks from database
   pg.connect(connectionString, function(err, client, done) {
     if(err) {
       console.log('connection error: ', err);
@@ -14,9 +13,7 @@ router.get('/', function(req, res) {
     }
 
     client.query('SELECT * FROM tasks ORDER BY status DESC', function(err, result) {
-      done(); // close the connection.
-
-      // console.log('the client!:', client);
+      done();
 
       if(err) {
         console.log('select query error: ', err);
@@ -29,9 +26,11 @@ router.get('/', function(req, res) {
   });
 }); // get request ends
 
+// request to add a new task to the database
 router.post('/', function(req, res) {
+
   var newTask = req.body;
-  console.log(newTask);
+
   pg.connect(connectionString, function(err, client, done) {
     if(err) {
       console.log('connection error: ', err);
@@ -57,10 +56,10 @@ router.post('/', function(req, res) {
 
 }); // post request ends
 
+// request to delete a task from the database
 router.delete('/:id', function(req, res) {
   taskID = req.params.id;
 
-  console.log('task id to delete: ', taskID);
   pg.connect(connectionString, function(err, client, done) {
     if(err) {
       console.log('connection error: ', err);
@@ -83,11 +82,10 @@ router.delete('/:id', function(req, res) {
 
 }); // delete request ends
 
+// request to update the status of a task when it is completed
 router.put('/:id', function(req, res) {
   taskID = req.params.id;
   task = req.body;
-
-  console.log('task to update ', task);
 
   pg.connect(connectionString, function(err, client, done) {
     if(err) {
@@ -98,7 +96,6 @@ router.put('/:id', function(req, res) {
     client.query(
       'UPDATE tasks SET status=$1' +
       ' WHERE id=$2',
-      // array of values to use in the query above
       [task.status, taskID],
       function(err, result) {
         if(err) {
@@ -108,10 +105,9 @@ router.put('/:id', function(req, res) {
           res.sendStatus(200);
         }
       });
-    }); // close connect
+    });
 
 }); // end put request
-
 
 
 module.exports = router;
