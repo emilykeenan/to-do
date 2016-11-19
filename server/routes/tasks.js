@@ -57,4 +57,35 @@ router.post('/', function(req, res) {
 
 }); // post request ends
 
+// router.put('/:id', function(req, res) {
+//   taskID = req.params.id;
+//   book = req.body;
+//
+//   console.log('book to update ', book);
+//
+//   pg.connect(connectionString, function(err, client, done) {
+//     if(err) {
+//       console.log('connection error: ', err);
+//       res.sendStatus(500);
+//     }
+//
+//     client.query(
+//       'UPDATE books SET title=$1, author=$2, genre=$3, published=$4, edition=$5, publisher=$6' +
+//       ' WHERE id=$7',
+//       // array of values to use in the query above
+//       [book.title, book.author, book.genre, book.published, book.edition, book.publisher, bookID],
+//       function(err, result) {
+//         if(err) {
+//           console.log('update error: ', err);
+//           res.sendStatus(500);
+//         } else {
+//           res.sendStatus(200);
+//         }
+//       });
+//     }); // close connect
+//
+// }); // end put request
+
+
+
 module.exports = router;

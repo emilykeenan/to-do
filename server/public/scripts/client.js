@@ -6,9 +6,9 @@ $(document).ready(function() {
 
   // event functions
   $('#taskContainer').on('click', '.completeButton', function(){
-    var id = $(this).parent().data('id');
-    console.log('task '+ id + ' completed.');
-    $(this).parent().removeClass('incomplete').addClass('complete');
+    console.log($(this).parent().data('id'));
+    $(this).parent().removeClass('incomplete').addClass('complete ');
+    completeTask();
   });
 
   $('#taskContainer').on('click', '.deleteButton', function(){
@@ -75,5 +75,31 @@ function postTask() {
       console.log('could not post a new task');
     }
   })
+
+} // end postTask function
+
+function completeTask() {
+
+  var id = $(this).parent().data('id');
+  console.log($(this).children());
+
+  // make task object
+  var task = {};
+  task.id=id;
+  task.status='complete';
+  console.log(task);
+
+  $.ajax({
+    type: 'PUT',
+    url: '/tasks/' + id,
+    data: task,
+    success: function(result) {
+      console.log('completed task');
+      getTasks();
+    },
+    error: function(result) {
+      console.log('could not complete task.');
+    }
+  });
 
 }
