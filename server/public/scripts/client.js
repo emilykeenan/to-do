@@ -1,23 +1,27 @@
 $(document).ready(function() {
   console.log('jquery loaded!');
 
-  // getting tasks from the database on load
+  // getting tasks from the database on page load
   getTasks();
 
   // event functions
-  $('#taskContainer').on('click', '.completeButton', updateTask);
+  $('#taskContainer').on('click', '.completeButton', completeTask);
 
   $('#taskContainer').on('click', '.deleteButton', deleteTask);
 
   $('#submitTask').on('click', function() {
+    // posting a new task on submit
     postTask();
+
+    // clearing out input after submit
     $('#taskForm').find('input').val('');
+
   });
-
-
 
 }); // end doc ready
 
+// getting existing complete and incomplete tasks from the database
+// and appending them to the DOM
 function getTasks() {
   $.ajax({
     type: 'GET',
@@ -29,8 +33,9 @@ function getTasks() {
       console.log('Database error');
     }
   })
-}
+} // end getTasks function
 
+// function to append tasks to the DOM, give it the data of ID and class of complete or incomplete
 function appendTasks(tasks) {
   $("#taskContainer").empty();
 
@@ -42,21 +47,23 @@ function appendTasks(tasks) {
     $el.append('<button class="completeButton">Complete</button>');
     $el.append('<button class="deleteButton">Delete</button>');
   }
-}
+} // end appendTasks function
 
+// function to post a new task to the database and reappend tasks to the DOM
 function postTask() {
   event.preventDefault();
 
   var task = {};
 
   $.each($('#taskForm').serializeArray(), function (i, field) {
-        task[field.name] = field.value;
-      });
+    task[field.name] = field.value;
+  });
 
-      task.status = 'incomplete';
+  task.status = 'incomplete';
 
   console.log('task: ', task);
 
+// verification to ensure no posted tasks are blank
   if(task.description == '') {
     alert('Please enter a task before submitting!');
     return false;
@@ -76,10 +83,13 @@ function postTask() {
 
 } // end postTask function
 
+// function to delete a task from the database and reappend tasks to the DOM
 function deleteTask() {
   var id = $(this).parent().data('id');
   console.log(id);
 
+// delete confirmation --- if the user does not click "ok" the function ends and never
+// reaches the ajax call
   var confirmation = confirm("Are you sure you want to delete this task?");
   if (confirmation === false) {
     event.preventDefault();
@@ -98,15 +108,14 @@ function deleteTask() {
   });
 } // end deleteTask function
 
-// updateTask function
-function updateTask() {
+// function to mark a task as complete and update its CSS class accordingly
+function completeTask() {
   console.log($(this).parent().data('id'));
   $(this).parent().removeClass('incomplete').addClass('complete ');
 
   var id = $(this).parent().data('id');
   console.log(id);
 
-  // make task object
   var task = {};
   task.id=id;
   task.status='complete';
@@ -124,4 +133,4 @@ function updateTask() {
       console.log('could not complete task.');
     }
   });
-}
+} // end completeTask function
