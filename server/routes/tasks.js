@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
       res.sendStatus(500);
     }
 
-    client.query('SELECT * FROM tasks', function(err, result) {
+    client.query('SELECT * FROM tasks ORDER BY status DESC', function(err, result) {
       done(); // close the connection.
 
       // console.log('the client!:', client);
