@@ -5,38 +5,9 @@ $(document).ready(function() {
   getTasks();
 
   // event functions
-  $('#taskContainer').on('click', '.completeButton', function(){
-    console.log($(this).parent().data('id'));
-    $(this).parent().removeClass('incomplete').addClass('complete ');
+  $('#taskContainer').on('click', '.completeButton', updateTask);
 
-    var id = $(this).parent().data('id');
-    console.log(id);
-
-    // make task object
-    var task = {};
-    task.id=id;
-    task.status='complete';
-    console.log(task);
-
-    $.ajax({
-      type: 'PUT',
-      url: '/tasks/' + id,
-      data: task,
-      success: function(result) {
-        console.log('completed task');
-        getTasks();
-      },
-      error: function(result) {
-        console.log('could not complete task.');
-      }
-    });
-
-  });
-
-  $('#taskContainer').on('click', '.deleteButton', function(){
-    var id = $(this).parent().data('id');
-    console.log('task '+ id + ' completed.');
-  });
+  $('#taskContainer').on('click', '.deleteButton', deleteTask);
 
   $('#submitTask').on('click', function() {
     postTask();
@@ -100,8 +71,46 @@ function postTask() {
 
 } // end postTask function
 
-function completeTask() {
+function deleteTask() {
+  var id = $(this).parent().data('id');
+  console.log(id);
 
+  $.ajax({
+    type: 'DELETE',
+    url: '/tasks/' + id,
+    success: function(result) {
+      getTasks();
+    },
+    error: function(result) {
+      console.log('could not delete task.');
+    }
+  });
+} // end deleteTask function
 
+// updateTask function
+function updateTask() {
+  console.log($(this).parent().data('id'));
+  $(this).parent().removeClass('incomplete').addClass('complete ');
 
+  var id = $(this).parent().data('id');
+  console.log(id);
+
+  // make task object
+  var task = {};
+  task.id=id;
+  task.status='complete';
+  console.log(task);
+
+  $.ajax({
+    type: 'PUT',
+    url: '/tasks/' + id,
+    data: task,
+    success: function(result) {
+      console.log('completed task');
+      getTasks();
+    },
+    error: function(result) {
+      console.log('could not complete task.');
+    }
+  });
 }
